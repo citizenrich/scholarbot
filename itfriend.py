@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, jsonify, request
 from crossrefquery import *
+import json
 
 #test
 # stuff = 'book' #book, dissertation, monograph, journal-article, book-chapter
@@ -16,9 +17,7 @@ def hello_world():
     words = [request.args.get('words')]
     resp = requestarticles(cat, words)
     length = len(resp)
-    return jsonify(length = length, results = resp)
-    #return jsonify({'length': length, 'results': z})
-    #fyi, textit.in can index arrays and do nested, e.g. @extra.products.0.name
+    return jsonify(length = json.dumps(length), results = json.dumps(resp))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug = False)
