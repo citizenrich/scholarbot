@@ -2,10 +2,11 @@
 from flask import Flask, jsonify, request
 from crossrefquery import *
 
-stuff = 'book' #book, dissertation, monograph, journal-article, book-chapter
-test = [u'Nixon', u'Cold War']
-z = requestarticles(stuff, test)
-print z
+#test
+# stuff = 'book' #book, dissertation, monograph, journal-article, book-chapter
+# test = [u'Nixon', u'Cold War']
+# z = requestarticles(stuff, test)
+# print z
 
 app = Flask(__name__)
 
