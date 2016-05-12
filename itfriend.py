@@ -16,7 +16,7 @@ def hello_world():
     words = [request.args.get('words')]
     resp = requestarticles(cat, words)
     length = len(resp)
-    return json.dumps({'length': length, 'results': resp})
+    return jsonify(length = length, results = resp)
     #return jsonify({'length': length, 'results': z})
     #fyi, textit.in can index arrays and do nested, e.g. @extra.products.0.name
 
