@@ -20,4 +20,4 @@ def hello_world():
     #fyi, textit.in can index arrays and do nested, e.g. @extra.products.0.name
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(host='0.0.0.0', debug = False)
