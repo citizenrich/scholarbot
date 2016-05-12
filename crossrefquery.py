@@ -15,15 +15,7 @@ def requestarticles(cat, keywords):
     for i in xdict.get('message').get('items'):
         url = i.get('URL')
         title = i.get('title')[0]
-        try:
-            container = i.get('container-title')[0]
-        except:
-            container = ''
-        try:
-            firstauthor = i.get('author')[0].get('family')
-        except:
-            firstauthor = ''
-        result = {'firstauthor': firstauthor, 'title': title, 'container': container, 'url': url, 'intitle': []}
+        result = {'title': title, 'url': url, 'intitle': []}
         results.append(result)
     for idx, val in enumerate(results):
         x = [i for i in keywords if i in val.get('title')]

@@ -4,7 +4,7 @@ from crossrefquery import *
 
 #test
 # stuff = 'book' #book, dissertation, monograph, journal-article, book-chapter
-# test = [u'Nixon', u'Cold War']
+# test = ['Cold War']
 # z = requestarticles(stuff, test)
 # print z
 
@@ -22,3 +22,4 @@ def hello_world():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug = False)
+    #app.run(debug = True)
