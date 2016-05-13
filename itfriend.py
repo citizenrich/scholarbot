@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from crossrefquery import *
 import json
 
@@ -15,9 +15,10 @@ app = Flask(__name__)
 def hello_world():
     cat = (request.args.get('cat'))
     words = [request.args.get('words')]
-    resp = requestarticles(cat, words)
-    length = len(resp)
-    return jsonify(length = length)
+    output = requestarticles(cat, words)
+    length = len(output)
+    resp = Response(response=json.dumps(output), status=200, mimetype="application/json")
+    return resp
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug = False)
