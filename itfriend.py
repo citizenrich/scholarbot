@@ -20,5 +20,5 @@ def hello_world():
     return jsonify(length = length)
 
 if __name__ == '__main__':
-    #app.run(host='0.0.0.0', debug = False)
-    app.run(debug = True)
+    app.run(host='0.0.0.0', debug = False)
+    #app.run(debug = True)
