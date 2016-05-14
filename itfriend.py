@@ -7,9 +7,9 @@ app = Flask(__name__)
 def hello_world():
     cat = (request.args.get('cat'))
     words = [request.args.get('words')]
-    x = {}
     x = requestarticles(cat, words)
-    return jsonify({'results': x})
+    length = len(x)
+    return jsonify({'length': length, 'results': x})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug = False)
