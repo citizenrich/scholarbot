@@ -18,14 +18,14 @@ def requestarticles(cat, keywords):
         result = {'title': title, 'url': url, 'intitle': []}
         results.append(result)
     for idx, val in enumerate(results):
-        x = [i for i in keywords if i in val.get('title')]
+        x = [i for i in keywords if i.lower() in val.get('title').lower()]
         val['intitle'] = x
     output = [el for el in results if el.get('intitle')]
     return output
 
 #tests
 # stuff = 'book' #book, dissertation, monograph, journal-article, book-chapter
-# test = [u'Nixon', u'Cold War']
+# test = [u'Nixon', u'cold war']
 # z = requestarticles(stuff, test)
 # print z
 
