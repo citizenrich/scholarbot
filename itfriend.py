@@ -7,6 +7,7 @@ app = Flask(__name__)
 def hello_world():
     cat = (request.args.get('cat'))
     words = [request.args.get('words')]
+    x = {}
     x = requestarticles(cat, words)
     return jsonify({'results': x})
 
