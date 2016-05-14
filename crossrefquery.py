@@ -20,8 +20,8 @@ def requestarticles(cat, keywords):
     for idx, val in enumerate(results):
         x = [i for i in keywords if i in val.get('title')]
         val['intitle'] = x
-    results[:] = [el for el in results if el.get('intitle')]
-    return results
+    output = [el for el in results if el.get('intitle')]
+    return output
 
 #tests
 # stuff = 'book' #book, dissertation, monograph, journal-article, book-chapter
