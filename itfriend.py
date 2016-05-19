@@ -7,9 +7,14 @@ app = Flask(__name__)
 def hello_world():
     cat = (request.args.get('cat'))
     words = [request.args.get('words')]
-    x = requestarticles(cat, words)
-    length = len(x)
-    return jsonify({'length': length, 'results': x})
+    if cat == 'book':
+        bks = requestarticles(cat, words)
+        cat = 'monograph'
+        mono = requestarticles(cat, words)
+        z = bks + mono
+    z = requestarticles(cat, words)
+    length = len(z)
+    return jsonify({'length': length, 'results': z})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug = False)
