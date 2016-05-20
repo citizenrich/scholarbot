@@ -12,7 +12,8 @@ def hello_world():
         cat = 'monograph'
         mono = requestarticles(cat, words)
         z = bks + mono
-    z = requestarticles(cat, words)
+    else:
+        z = requestarticles(cat, words)
     length = len(z)
     return jsonify({'length': length, 'results': z})
 
