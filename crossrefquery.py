@@ -1,36 +1,41 @@
 import requests
 import json
+import urllib
 
 """
-bdmj: book, dissertation, monograph, journal-article, book-chapter
-20 queries max in one go
-crossref api queries return authors and journal titles from the keywords, so restrict to just title
+bdmj: book, dissertation, monograph, journal-article, book-chapter, 20 queries max in one go
 """
 
-def requestarticles(cat, keywords):
+def getcrossref(cat, since, keywords):
     results = []
     url = 'http://api.crossref.org/works?'
-    payload = {'query': keywords, 'filter': 'type:{bdmj},from-pub-date:2013-01'.format(bdmj = cat), 'rows': 20}
+    addurl = urllib.pathname2url(keywords)
+    payload = {'query.title': keywords, 'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj = cat, date = since), 'rows': 20}
+    #payload = {'query.title': '\"{key}\"'.format(key = addurl), 'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj = cat, date = since), 'rows': 20}
     x = requests.get(url, params=payload)
     xdict = x.json()
     for i in xdict.get('message').get('items'):
         url = i.get('URL')
         title = i.get('title')[0]
-        result = {'title': title, 'url': url, 'intitle': []}
-        results.append(result)
-    for idx, val in enumerate(results):
-        x = [i for i in keywords if i.lower() in val.get('title').lower()]
-        val['intitle'] = x
-    output = [el for el in results if el.get('intitle')]
-    return output
+        try:
+            subtitle  = i.get('subtitle')[0]
+            fulltitle = title + ': ' + subtitle
+        except:
+            fulltitle = title
+        dateall = str(i.get('deposited').get('date-time'))
+        date = dateall[:10]
+        typeof = i.get('type')
+        result = {'type': typeof, 'date': date, 'title': fulltitle, 'url': url, 'source': 'crossref'}
+        if keywords.lower() not in result.get('title').lower():
+            continue
+        else:
+            results.append(result)
+    return results
+    print addurl
 
 #tests
 # stuff = 'book'
-# test = [u'Nixon', u'cold war']
-# z = requestarticles(stuff, test)
-#print z
-#stuff = 'monograph'
-#w = requestarticles(stuff, test)
-#print w
-#y = z + w
-#print y[9]
+# when = '2015-01'
+# test = 'cold war'
+# z = getcrossref(stuff, when, test)
+# print z
