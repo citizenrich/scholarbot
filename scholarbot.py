@@ -20,8 +20,6 @@ def version1():
     length = len(z)
     return jsonify({'length': length, 'results': z})
 
-#v1?words=@flow.keywords.text&cat=@flow.category.category
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug = False)
     #app.run(debug = True)
