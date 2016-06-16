@@ -1,5 +1,5 @@
 # scholarbot
-**ScholarBot** - A simple web service to return the latest academic papers.
+A simple web service to return the latest academic papers.
 
 ### Sources
 * The latest tables of contents from top journals from [JournalTOCs](http://www.journaltocs.ac.uk/develop.php)
