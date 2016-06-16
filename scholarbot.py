@@ -5,15 +5,6 @@ import operator
 
 app = Flask(__name__)
 
-@app.route('/v0')
-def version0():
-    stuff = 'journal-article'
-    since = request.args.get('date')
-    words = request.args.get('words')
-    z = getcrossref(stuff, since, words)
-    length = len(z)
-    return jsonify({'length': length, 'results': z})
-
 @app.route('/v1')
 def version1():
     date = (request.args.get('date'))
