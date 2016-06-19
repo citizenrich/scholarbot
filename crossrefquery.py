@@ -6,10 +6,11 @@ import urllib
 bdmj: book, dissertation, monograph, journal-article, book-chapter, 20 queries max in one go
 """
 
+
 def getcrossref(cat, since, keywords):
     results = []
     url = 'http://api.crossref.org/works?'
-    addurl = urllib.pathname2url(keywords)
+    #addurl = urllib.pathname2url(keywords)
     payload = {'query.title': keywords, 'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj = cat, date = since), 'rows': 20}
     #payload = {'query.title': '\"{key}\"'.format(key = addurl), 'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj = cat, date = since), 'rows': 20}
     x = requests.get(url, params=payload)
@@ -31,7 +32,6 @@ def getcrossref(cat, since, keywords):
         else:
             results.append(result)
     return results
-    print addurl
 
 #tests
 # stuff = 'book'

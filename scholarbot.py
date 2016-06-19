@@ -12,13 +12,14 @@ def version1():
     z = []
     toc = getjournaltoc(words)
     z.extend(toc)
-    stuff = ['book', 'monograph', 'journal-article', 'book-chapter']
+    stuff = ['book', 'monograph']
     for s in stuff:
         res = getcrossref(s, date, words)
         z.extend(res)
     z.sort(key=operator.itemgetter('date'), reverse=True)
-    length = len(z)
-    return jsonify({'length': length, 'results': z})
+    foo = z[:30]
+    length = len(foo)
+    return jsonify({'length': length, 'results': foo})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug = False)
