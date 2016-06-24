@@ -2,40 +2,40 @@ import requests
 import json
 import urllib
 
-"""
-bdmj: book, dissertation, monograph, journal-article, book-chapter, 20 queries max in one go
-"""
+class CrossRef(object):
+    """
+    bdmj: book, dissertation, monograph, journal-article, book-chapter, 20 queries max in one go
+    """
 
-
-def getcrossref(cat, since, keywords):
-    results = []
-    url = 'http://api.crossref.org/works?'
-    #addurl = urllib.pathname2url(keywords)
-    payload = {'query.title': keywords, 'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj = cat, date = since), 'rows': 20}
-    #payload = {'query.title': '\"{key}\"'.format(key = addurl), 'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj = cat, date = since), 'rows': 20}
-    x = requests.get(url, params=payload)
-    xdict = x.json()
-    for i in xdict.get('message').get('items'):
-        url = i.get('URL')
-        title = i.get('title')[0]
-        try:
-            subtitle  = i.get('subtitle')[0]
-            fulltitle = title + ': ' + subtitle
-        except:
-            fulltitle = title
-        dateall = str(i.get('deposited').get('date-time'))
-        date = dateall[:10]
-        typeof = i.get('type')
-        result = {'type': typeof, 'date': date, 'title': fulltitle, 'url': url, 'source': 'crossref'}
-        if keywords.lower() not in result.get('title').lower():
-            continue
-        else:
-            results.append(result)
-    return results
+    def getcrossref(self, cat, since, keywords):
+        results = []
+        url = 'http://api.crossref.org/works?'
+        #addurl = urllib.pathname2url(keywords)
+        payload = {'query.title': keywords, 'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj = cat, date = since), 'rows': 20}
+        #payload = {'query.title': '\"{key}\"'.format(key = addurl), 'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj = cat, date = since), 'rows': 20}
+        x = requests.get(url, params=payload)
+        xdict = x.json()
+        for i in xdict.get('message').get('items'):
+            url = i.get('URL')
+            title = i.get('title')[0]
+            try:
+                subtitle  = i.get('subtitle')[0]
+                fulltitle = title + ': ' + subtitle
+            except:
+                fulltitle = title
+            dateall = str(i.get('deposited').get('date-time'))
+            date = dateall[:10]
+            typeof = i.get('type')
+            result = {'type': typeof, 'date': date, 'title': fulltitle, 'url': url, 'source': 'crossref'}
+            if keywords.lower() not in result.get('title').lower():
+                continue
+            else:
+                results.append(result)
+        return results
 
 #tests
 # stuff = 'book'
 # when = '2015-01'
 # test = 'cold war'
-# z = getcrossref(stuff, when, test)
+# z = CrossRef().getcrossref(stuff, when, test)
 # print z

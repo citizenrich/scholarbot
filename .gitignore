@@ -1,4 +1,6 @@
 *.DS_Store
 *.pyc
+*.env
 *.json
+dump.rdb
 outtakes.py
