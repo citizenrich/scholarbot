@@ -12,11 +12,16 @@ def version1():
     z = []
     toc = JournalTOC().getjournaltoc(words)
     z.extend(toc)
-    # dropping crossref for now bc journaltoc is too slow but is more recent results
-    # stuff = ['book', 'monograph']
-    # for s in stuff:
-    #     res = CrossRef().getcrossref(s, date, words)
-    #     z.extend(res)
+    # this deals with journaltoc outage
+    if not z:
+        res = CrossRef().getcrossref('journal-article', date, words)
+        z.extend(res)
+    # not using books for now
+    # if not z:
+    #     stuff = ['book', 'monograph']
+    #     for s in stuff:
+    #         res2 = CrossRef().getcrossref(s, date, words)
+    #         z.extend(res2)
     z.sort(key=operator.itemgetter('date'), reverse=True)
     foo = z[:30]
     length = len(foo)

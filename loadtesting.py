@@ -14,7 +14,7 @@ class UserBehavior(TaskSet):
 
     def on_start(self):
         stuff1(self)
-
+        
 class WebsiteUser(HttpLocust):
     task_set = UserBehavior
     min_wait=5000

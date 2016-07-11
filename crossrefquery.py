@@ -18,15 +18,16 @@ class CrossRef(object):
         for i in xdict.get('message').get('items'):
             url = i.get('URL')
             title = i.get('title')[0]
-            try:
-                subtitle  = i.get('subtitle')[0]
-                fulltitle = title + ': ' + subtitle
-            except:
-                fulltitle = title
+            # for books, but not really needed otherwise
+            # try:
+            #     subtitle  = i.get('subtitle')[0]
+            #     fulltitle = title + ': ' + subtitle
+            # except:
+            #     fulltitle = title
             dateall = str(i.get('deposited').get('date-time'))
             date = dateall[:10]
             typeof = i.get('type')
-            result = {'type': typeof, 'date': date, 'title': fulltitle, 'url': url, 'source': 'crossref'}
+            result = {'type': typeof, 'date': date, 'title': title, 'url': url, 'source': 'crossref'} #fulltitle for title issue
             if keywords.lower() not in result.get('title').lower():
                 continue
             else:
