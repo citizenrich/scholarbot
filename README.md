@@ -42,3 +42,5 @@ http://localhost:5000/v1?date=2016-03&words=putin
   ]
 }
 ```
+
+The state machine and channel management is done using [RapidPro](https://github.com/rapidpro/rapidpro).
