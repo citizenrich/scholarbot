@@ -14,8 +14,10 @@ class UserBehavior(TaskSet):
 
     def on_start(self):
         stuff1(self)
-        
+
 class WebsiteUser(HttpLocust):
     task_set = UserBehavior
     min_wait=5000
     max_wait=15000#def 9000
+
+#locust -f ../locust_files/my_locust_file.py --host=http://example.com
