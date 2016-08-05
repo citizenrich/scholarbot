@@ -6,9 +6,11 @@ class JournalTOC(object):
     def getjournaltoc(self, keywords):
         results = []
         base = 'http://www.journaltocs.ac.uk/api/articles/'
-        params = ''
+        limit = 30
+        params = {'to': limit}
         url = '%s%s' % (base, keywords)
         response = requests.get(url, params=params)
+        print response.url
         rssdoc = feedparser.parse(response.content)
         for i in rssdoc.get('entries'):
             url = i.get('link')
@@ -26,6 +28,6 @@ class JournalTOC(object):
         return results
 
 #tests
-# test = 'putin'
-# z = JournalTOC().getjournaltoc(test)
-# print z
+test = 'Neural networks'
+z = JournalTOC().getjournaltoc(test)
+print z

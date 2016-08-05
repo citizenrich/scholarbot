@@ -23,7 +23,7 @@ def version1():
     #         res2 = CrossRef().getcrossref(s, date, words)
     #         z.extend(res2)
     z.sort(key=operator.itemgetter('date'), reverse=True)
-    foo = z[:30]
+    foo = z[:20]
     length = len(foo)
     return jsonify({'length': length, 'results': foo})
 
