@@ -6,7 +6,7 @@ class JournalTOC(object):
     def getjournaltoc(self, keywords):
         results = []
         base = 'http://www.journaltocs.ac.uk/api/articles/'
-        limit = 20
+        limit = 15
         params = {'to': limit}
         url = '%s%s' % (base, keywords)
         response = requests.get(url, params=params)
