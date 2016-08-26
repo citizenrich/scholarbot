@@ -1,8 +1,9 @@
 # ScholarBot
-A simple web service to return links to the latest academic papers that will eventually aspire to be Google Scholar without the Google. It's deployed to Heroku for now.
+A simple web service to return links to the latest academic papers that will eventually aspire to be Google Scholar without the Google. It's deployed to Heroku for now. Uses Python 2.x.
 
 ### Sources
-* The latest tables of contents from journals via [JournalTOCs](http://www.journaltocs.ac.uk/develop.php)
+* [arXiv API](http://arxiv.org/help/api/index)
+* The latest tables of contents from [JournalTOCs](http://www.journaltocs.ac.uk/develop.php)
 * [CrossRef REST API](https://github.com/CrossRef/rest-api-doc/blob/master/rest_api.md)
 
 All sources are free and require no authentication to use the API.
