@@ -1,5 +1,5 @@
 # ScholarBot
-A simple web service to return links to the latest academic papers.
+A simple web service to return links to the latest academic papers that will eventually aspire to be Google Scholar without the Google.
 
 ### Sources
 * The latest tables of contents from journals via [JournalTOCs](http://www.journaltocs.ac.uk/develop.php)
