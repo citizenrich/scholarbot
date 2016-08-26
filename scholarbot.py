@@ -13,16 +13,10 @@ def version1():
     toc = JournalTOC(words)
     toc_res = toc.getjournaltoc()
     z.extend(toc_res)
-    if z != 3:
+    if z <= 2:
         res = CrossRef('journal-article', date, words)
         res_res = res.getcrossref()
         z.extend(res_res)
-    # not using books for now
-    # if not z:
-    #     stuff = ['book', 'monograph']
-    #     for s in stuff:
-    #         res2 = CrossRef().getcrossref(s, date, words)
-    #         z.extend(res2)
     z.sort(key=operator.itemgetter('date'), reverse=True)
     foo = z[:10]
     length = len(foo)
@@ -30,4 +24,3 @@ def version1():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug = False)
-    #app.run(debug = True)
