@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
-from crossrefquery import CrossRef
-from journaltocquery import JournalTOC
+from providers.crossrefquery import CrossRef
+from providers.journaltocquery import JournalTOC
 import operator
 
 app = Flask(__name__)
@@ -10,12 +10,13 @@ def version1():
     date = (request.args.get('date'))
     words = request.args.get('words')
     z = []
-    toc = JournalTOC().getjournaltoc(words)
-    z.extend(toc)
-    # this deals with journaltoc outage
-    if not z:
-        res = CrossRef().getcrossref('journal-article', date, words)
-        z.extend(res)
+    toc = JournalTOC(words)
+    toc_res = toc.getjournaltoc()
+    z.extend(toc_res)
+    if z != 3:
+        res = CrossRef('journal-article', date, words)
+        res_res = res.getcrossref()
+        z.extend(res_res)
     # not using books for now
     # if not z:
     #     stuff = ['book', 'monograph']
