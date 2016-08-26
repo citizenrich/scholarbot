@@ -1,5 +1,5 @@
 # ScholarBot
-A simple web service to return links to the latest academic papers that will eventually aspire to be Google Scholar without the Google.
+A simple web service to return links to the latest academic papers that will eventually aspire to be Google Scholar without the Google. It's deployed to Heroku for now.
 
 ### Sources
 * The latest tables of contents from journals via [JournalTOCs](http://www.journaltocs.ac.uk/develop.php)
@@ -10,6 +10,8 @@ All sources are free and require no authentication to use the API.
 ### Example usage
 
 This gets the latest articles, books, monographs, and book chapters with the word 'putin' in the title, sorted by date, with most recent first, published since March 2016.
+
+http://scholarboteu.herokuapp.com/v1?date=2016-03&words=putin
 
 http://localhost:5000/v1?date=2016-03&words=putin
 
