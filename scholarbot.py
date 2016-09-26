@@ -5,6 +5,7 @@ import operator
 
 app = Flask(__name__)
 
+
 @app.route('/v1')
 def version1():
     date = (request.args.get('date'))
@@ -23,4 +24,4 @@ def version1():
     return jsonify({'length': length, 'results': foo})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug = False)
+    app.run(host='0.0.0.0', debug=False)

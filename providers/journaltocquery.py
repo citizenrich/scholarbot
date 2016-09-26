@@ -1,11 +1,12 @@
 import feedparser
 import requests
 
+
 class JournalTOC(object):
     """
-    no category - journal articles only, to= is limit, max is 300; no timeframe - just the most recent
+    no cat, articles only, to=limit, max 300; no timeframe, just most recent
     """
-    def __init__(self,keywords):
+    def __init__(self, keywords):
         self.keywords = keywords
         self.results = []
         self.base = 'http://www.journaltocs.ac.uk/api/articles/'
@@ -25,18 +26,20 @@ class JournalTOC(object):
             else:
                 dateall = str(i.get('date'))
             date = dateall[:10]
-            result = {'type': 'journal-article',
+            result = {
+                        'type': 'journal-article',
                         'date': date,
                         'title': title,
                         'url': url,
-                        'source': 'journaltoc'}
+                        'source': 'journaltoc'
+                    }
             if self.keywords.lower() not in result.get('title').lower():
                 continue
             else:
                 self.results.append(result)
         return self.results
 
-#tests
+# tests
 # test = 'Neural networks'
 # z = JournalTOC(test)
 # print z.getjournaltoc()

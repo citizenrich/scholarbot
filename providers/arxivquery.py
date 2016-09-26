@@ -1,9 +1,9 @@
 import feedparser
 import requests
 
-class arXiv(object):
-    """
-    """
+
+class ArXiv(object):
+
     def __init__(self, keywords):
         self.keywords = keywords
         self.results = []
@@ -22,11 +22,13 @@ class arXiv(object):
             title = i.get('title')
             dateall = str(i.get('published'))
             date = dateall[:10]
-            result = {'type': 'journal-article',
+            result = {
+                        'type': 'journal-article',
                         'date': date,
                         'title': title,
                         'url': url,
-                        'source': 'arxiv'}
+                        'source': 'arxiv'
+                }
             if self.keywords.lower() not in result.get('title').lower():
                 continue
             else:
@@ -34,7 +36,7 @@ class arXiv(object):
         return self.results
 
 
-#tests
+# tests
 # test = 'Neural networks'
 # z = arXiv(test)
 # print z.getarxiv()

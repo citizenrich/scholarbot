@@ -1,10 +1,12 @@
 import requests
 import json
-#import urllib
+# import urllib
+
 
 class CrossRef(object):
     """
-    bdmj: book, dissertation, monograph, journal-article, book-chapter, 20 queries max in one go
+    bdmj: book, dissertation, monograph, journal-article, book-chapter
+    20 queries max in one go
     """
     def __init__(self, cat, since, keywords):
         self.cat = cat
@@ -16,15 +18,18 @@ class CrossRef(object):
         self.url = ''
 
     def getcrossref(self):
-        #addurl = urllib.pathname2url(keywords) #alternative approach to building query.
-        payload = {'query.title': self.keywords,
-                    'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj = self.cat, date = self.since),
-                    'rows': self.limit}
+        # addurl = urllib.pathname2url(keywords) #alternative approach to building query.
+        payload = {
+                    'query.title': self.keywords,
+                    'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj=self.cat, date=self.since),
+                    'rows': self.limit
+                }
 
-        # payload = {'query.title': '\"{key}\"'.format(key = addurl),
-        #             'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj = cat, date = since),
-        #             'rows': 20}
-
+        # payload = {
+        #             'query.title': '\"{key}\"'.format(key = addurl),
+        #             'filter': 'type:{bdmj},from-pub-date:{date}'.format(bdmj=cat, date=since),
+        #             'rows': 20
+        #         }
         x = requests.get(self.base, params=payload)
         self.url = x.url
         xdict = x.json()
@@ -40,18 +45,20 @@ class CrossRef(object):
             dateall = str(i.get('deposited').get('date-time'))
             date = dateall[:10]
             typeof = i.get('type')
-            result = {'type': typeof,
+            result = {
+                        'type': typeof,
                         'date': date,
                         'title': title,
                         'url': url,
-                        'source': 'crossref'} #fulltitle for title issue
+                        'source': 'crossref'
+                    }  # fulltitle for title issue
             if self.keywords.lower() not in result.get('title').lower():
                 continue
             else:
                 self.results.append(result)
         return self.results
 
-#tests
+# tests
 # stuff = 'journal-article'
 # when = '2015-01'
 # test = 'cold war'
